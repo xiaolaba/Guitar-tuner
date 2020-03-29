@@ -8,7 +8,7 @@ save a copy here for learning
 
 ![C source code gtuner.c](gtuner.c)
 
-![Jesper's AVR pages - Guitar Tuner.pdf](Jesper's AVR pages - Guitar Tuner.pdf)
+![A copy of the project and description](Jesper's AVR pages - Guitar Tuner.pdf)
 
 
 
