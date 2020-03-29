@@ -1,3 +1,8 @@
+
+![xiaolaba_tiny13_guitar_tuner_schematic.jpg](xiaolaba_tiny13_guitar_tuner_schematic.jpg)
+![xiaolaba_tiny13_guitar_tuner_schematic.pdf](xiaolaba_tiny13_guitar_tuner_schematic.pdf)
+
+
 ## C code only
 
 uses ARduino IDE or direct avr-gcc to compile, both ok.  
