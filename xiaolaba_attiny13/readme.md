@@ -74,4 +74,8 @@ add name for pin & functions
   
 ## firmware image  
 ![gtuner_tiny13.ino.hex](gtuner_tiny13.ino.hex)  
+  
+## Attiny13 data sheet, (Atmel) now is Microchip 
+![ATtiny13.pdf](ATtiny13.pdf)  
+
 
