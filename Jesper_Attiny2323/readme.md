@@ -4,7 +4,7 @@ http://www.radanpro.com/Radan2400/mikrokontroleri/Jesper%27s%20AVR%20pages%20-%2
 
 save a copy here for learning
 
-AT90S2323, 2K flash, datasheet
+![AT90S2323, 2K flash, datasheet](AT90S2323.pdf)
 
 
 
