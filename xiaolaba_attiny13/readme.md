@@ -1,3 +1,8 @@
+## C code only
+
+uses ARduino IDE or direct avr-gcc to compile, both ok.  
+
+
 
 ## Reference : 
 Jesper_Attiny2323, it was design by Jesper and AT90S2323 used, about 20 years ago.
@@ -7,15 +12,15 @@ build a toy.
 try to port to uses Attiny13 of which is almost pin-to-pin compatible with obsolete AT90S2323, both are 8-pin device.
 
 
-compile and batch file
-```
+## compile and batch file
+
 set the soruce code as 'main'
-```
+
 ```
 set main=gtuner_tiny13.ino
-```
+```  
+
 compiler option, specify *.ino rather than general *.c
-```
 
 ```
 avr-gcc.exe -xc -Os -mmcu=at%mcu% -Wall -g -o %main%.out *.ino
