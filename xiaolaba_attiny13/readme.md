@@ -55,9 +55,9 @@ del %main%.out
 
 ## note
 
-timer0 ISR routine, revised.  
+timer0 ISR routine, revised. vector, TIM0_OVF_vect, address is 0x0003
 
-define cbi / sbi to support decepted marco and code style.
+define cbi / sbi to support decepted marco and code style. see https://www.nongnu.org/avr-libc/user-manual/group__avr__sfr.html
 
 add name for pin & functions
 #define LED_HI PB0
