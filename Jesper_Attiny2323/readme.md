@@ -4,11 +4,13 @@ http://www.radanpro.com/Radan2400/mikrokontroleri/Jesper%27s%20AVR%20pages%20-%2
 
 save a copy here for learning
 
-![AT90S2323, 2K flash, datasheet](AT90S2323.pdf)
+![AT90S2323, 2K flash, datasheet, obsolete part number](AT90S2323.pdf)
 
 ![C source code gtuner.c](gtuner.c)
 
-![Jesper's_AVR_pages-Guitar_Tuner_sch.pdf](Jesper's_AVR_pages-Guitar_Tuner_sch.pdf)
+![A copy of Jesper's_AVR_pages-Guitar_Tuner_sch.pdf, include project description and schematic](Jesper's_AVR_pages-Guitar_Tuner_sch.pdf)
+
+
 
 
 
