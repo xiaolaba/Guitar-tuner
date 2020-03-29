@@ -53,4 +53,20 @@ del %main%.out
 :end
 ```
 
+## note
+
+timer0 ISR routine, revised.  
+
+define cbi / sbi to support decepted marco and code style.
+
+add name for pin & functions
+#define LED_HI PB0
+#define MIC_IN PB1
+#define LED_LO PB2
+
+## source code  
+![gtuner_tiny13.ino](gtuner_tiny13.ino)
+  
+## firmware image  
+![gtuner_tiny13.ino.hex](gtuner_tiny13.ino.hex)  
 
