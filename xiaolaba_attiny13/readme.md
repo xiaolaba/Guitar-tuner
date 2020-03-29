@@ -65,10 +65,10 @@ timer0 ISR routine, revised. vector, TIM0_OVF_vect, address is 0x0003
 define cbi / sbi to support decepted marco and code style. see https://www.nongnu.org/avr-libc/user-manual/group__avr__sfr.html
 
 add name for pin & functions
-#define LED_HI PB0
-#define MIC_IN PB1
-#define LED_LO PB2
-
+#define LED_HI PB0  
+#define MIC_IN PB1  
+#define LED_LO PB2  
+  
 ## source code  
 ![gtuner_tiny13.ino](gtuner_tiny13.ino)
   
