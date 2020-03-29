@@ -24,8 +24,9 @@ compiler option, specify *.ino rather than general *.c
 
 ```
 avr-gcc.exe -xc -Os -mmcu=at%mcu% -Wall -g -o %main%.out *.ino
-```
-complete batch file
+```  
+  
+complete batch file, ![build.bat](build.bat)
 
 ```
 @echo off
