@@ -1,0 +1,340 @@
+
+gtuner_tiny13.ino.out:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000148  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000016  00800060  00000148  000001dc  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000001  00800076  00800076  000001f2  2**0
+                  ALLOC
+  3 .debug_aranges 00000020  00000000  00000000  000001f2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 0000005d  00000000  00000000  00000212  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000109  00000000  00000000  0000026f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000000a9  00000000  00000000  00000378  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000001a5  00000000  00000000  00000421  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000030  00000000  00000000  000005c8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000000ee  00000000  00000000  000005f8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000050  00000000  00000000  000006e6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	09 c0       	rjmp	.+18     	; 0x14 <__ctors_end>
+   2:	21 c0       	rjmp	.+66     	; 0x46 <__bad_interrupt>
+   4:	20 c0       	rjmp	.+64     	; 0x46 <__bad_interrupt>
+   6:	20 c0       	rjmp	.+64     	; 0x48 <__vector_3>
+   8:	1e c0       	rjmp	.+60     	; 0x46 <__bad_interrupt>
+   a:	1d c0       	rjmp	.+58     	; 0x46 <__bad_interrupt>
+   c:	1c c0       	rjmp	.+56     	; 0x46 <__bad_interrupt>
+   e:	1b c0       	rjmp	.+54     	; 0x46 <__bad_interrupt>
+  10:	1a c0       	rjmp	.+52     	; 0x46 <__bad_interrupt>
+  12:	19 c0       	rjmp	.+50     	; 0x46 <__bad_interrupt>
+
+00000014 <__ctors_end>:
+  14:	11 24       	eor	r1, r1
+  16:	1f be       	out	0x3f, r1	; 63
+  18:	cf e9       	ldi	r28, 0x9F	; 159
+  1a:	cd bf       	out	0x3d, r28	; 61
+
+0000001c <__do_copy_data>:
+  1c:	10 e0       	ldi	r17, 0x00	; 0
+  1e:	a0 e6       	ldi	r26, 0x60	; 96
+  20:	b0 e0       	ldi	r27, 0x00	; 0
+  22:	e8 e4       	ldi	r30, 0x48	; 72
+  24:	f1 e0       	ldi	r31, 0x01	; 1
+  26:	02 c0       	rjmp	.+4      	; 0x2c <.do_copy_data_start>
+
+00000028 <.do_copy_data_loop>:
+  28:	05 90       	lpm	r0, Z+
+  2a:	0d 92       	st	X+, r0
+
+0000002c <.do_copy_data_start>:
+  2c:	a6 37       	cpi	r26, 0x76	; 118
+  2e:	b1 07       	cpc	r27, r17
+  30:	d9 f7       	brne	.-10     	; 0x28 <.do_copy_data_loop>
+
+00000032 <__do_clear_bss>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a6 e7       	ldi	r26, 0x76	; 118
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	01 c0       	rjmp	.+2      	; 0x3c <.do_clear_bss_start>
+
+0000003a <.do_clear_bss_loop>:
+  3a:	1d 92       	st	X+, r1
+
+0000003c <.do_clear_bss_start>:
+  3c:	a7 37       	cpi	r26, 0x77	; 119
+  3e:	b1 07       	cpc	r27, r17
+  40:	e1 f7       	brne	.-8      	; 0x3a <.do_clear_bss_loop>
+  42:	13 d0       	rcall	.+38     	; 0x6a <main>
+  44:	7f c0       	rjmp	.+254    	; 0x144 <_exit>
+
+00000046 <__bad_interrupt>:
+  46:	dc cf       	rjmp	.-72     	; 0x0 <__vectors>
+
+00000048 <__vector_3>:
+	count_hi++;						// increment overflow count
+}
+*/
+
+ISR (TIM0_OVF_vect)    // Timer0 ISR, Attiny13, gcc-4.3.3
+{
+  48:	1f 92       	push	r1
+  4a:	0f 92       	push	r0
+  4c:	0f b6       	in	r0, 0x3f	; 63
+  4e:	0f 92       	push	r0
+  50:	11 24       	eor	r1, r1
+  52:	8f 93       	push	r24
+  count_hi++;           // increment overflow count
+  54:	80 91 76 00 	lds	r24, 0x0076
+  58:	8f 5f       	subi	r24, 0xFF	; 255
+  5a:	80 93 76 00 	sts	0x0076, r24
+}
+  5e:	8f 91       	pop	r24
+  60:	0f 90       	pop	r0
+  62:	0f be       	out	0x3f, r0	; 63
+  64:	0f 90       	pop	r0
+  66:	1f 90       	pop	r1
+  68:	18 95       	reti
+
+0000006a <main>:
+// The cbi() & sbi() is defined in hardware/arduino/avr/cores/arduino/wiring_private.h, Arduino IDE 1.8.12
+// #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+// #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+// deprecated sbi/cbi macros, bring it back
+
+  cbi(DDRB, 1);			// PB1 is input
+  6a:	b9 98       	cbi	0x17, 1	; 23
+  DDRB &= ~(_BV(MIC_IN)); // PB1 is input   
+  6c:	b9 98       	cbi	0x17, 1	; 23
+ 
+  cbi(PORTB, 1);		// no pullups active
+  6e:	c1 98       	cbi	0x18, 1	; 24
+  PORTB&= ~(_BV(MIC_IN)); // no pullups active
+  70:	c1 98       	cbi	0x18, 1	; 24
+  	
+  sbi(DDRB, 0);			// PB0 is ouput, High LED
+  72:	b8 9a       	sbi	0x17, 0	; 23
+  DDRB |= _BV(LED_HI);  // PB0 is ouput, High LED   
+  74:	b8 9a       	sbi	0x17, 0	; 23
+	
+  sbi(DDRB, 2);			// PB2 is ouput, Low LED
+  76:	ba 9a       	sbi	0x17, 2	; 23
+  DDRB |= _BV(LED_LO);  // PB2 is ouput, Low LE
+  78:	ba 9a       	sbi	0x17, 2	; 23
+/*
+  // TCCR0, addrees 0x33/0x53 for AT90S2323/4323
+  outp(0x03,TCCR0);		// set prescaler to f/64 (172.8 kHz @ 11.0592 MHz)
+*/
+// TCCR0B, Attiny13
+  TCCR0B = 0x03;   // set prescaler to f/64 (150 kHz @ 9.6 MHz)
+  7a:	83 e0       	ldi	r24, 0x03	; 3
+  7c:	83 bf       	out	0x33, r24	; 51
+
+  //sbi(TIMSK,TOIE0);		// enable interrupt on timer overflow, AT90S2323
+  TIMSK0 = 1<TOIE0;    // Attiny13, enable interrupt on timer overflow
+  7e:	19 be       	out	0x39, r1	; 57
+
+	asm volatile ("sei");	// global interrupt enable
+  80:	78 94       	sei
+
+
+	while (1)								// loop forever
+	{
+		count = 0;							// clear sample count
+		loop_until_bit_is_set(PINB,1);		// wait for something to happen
+  82:	b1 9b       	sbis	0x16, 1	; 22
+  84:	fe cf       	rjmp	.-4      	; 0x82 <main+0x18>
+    loop_until_bit_is_set(PINB,MIC_IN);    // wait for something to happen
+  86:	b1 9b       	sbis	0x16, 1	; 22
+  88:	fe cf       	rjmp	.-4      	; 0x86 <main+0x1c>
+
+		// got a high edge
+		// start sampling
+		
+		//outp(0,TCNT0);						// clear counter
+    TCNT0 =0;            // clear counter		 
+  8a:	12 be       	out	0x32, r1	; 50
+		count_hi = 0;						// clear hi count
+  8c:	10 92 76 00 	sts	0x0076, r1
+  90:	20 e0       	ldi	r18, 0x00	; 0
+  92:	30 e0       	ldi	r19, 0x00	; 0
+  94:	40 e0       	ldi	r20, 0x00	; 0
+  96:	50 e0       	ldi	r21, 0x00	; 0
+  98:	04 c0       	rjmp	.+8      	; 0xa2 <__stack+0x3>
+		// sample loop
+		
+		for (i=0;i<32;i++)
+		{
+			while (bit_is_set(PINB,1))		// ignore hi->lo edge transitions
+				if (count_hi > 80)			// skip if no edge is seen within
+  9a:	80 91 76 00 	lds	r24, 0x0076
+  9e:	81 35       	cpi	r24, 0x51	; 81
+  a0:	38 f4       	brcc	.+14     	; 0xb0 <__stack+0x11>
+		
+		// sample loop
+		
+		for (i=0;i<32;i++)
+		{
+			while (bit_is_set(PINB,1))		// ignore hi->lo edge transitions
+  a2:	b1 99       	sbic	0x16, 1	; 22
+  a4:	fa cf       	rjmp	.-12     	; 0x9a <main+0x30>
+  a6:	04 c0       	rjmp	.+8      	; 0xb0 <__stack+0x11>
+				if (count_hi > 80)			// skip if no edge is seen within
+					break;					// a reasonable time
+
+			while (bit_is_clear(PINB,1))	// wait for lo->hi edge
+				if (count_hi > 80)			// skip if no edge is seen within
+  a8:	80 91 76 00 	lds	r24, 0x0076
+  ac:	81 35       	cpi	r24, 0x51	; 81
+  ae:	10 f4       	brcc	.+4      	; 0xb4 <__stack+0x15>
+		{
+			while (bit_is_set(PINB,1))		// ignore hi->lo edge transitions
+				if (count_hi > 80)			// skip if no edge is seen within
+					break;					// a reasonable time
+
+			while (bit_is_clear(PINB,1))	// wait for lo->hi edge
+  b0:	b1 9b       	sbis	0x16, 1	; 22
+  b2:	fa cf       	rjmp	.-12     	; 0xa8 <__stack+0x9>
+				if (count_hi > 80)			// skip if no edge is seen within
+					break;					// a reasonable time
+
+//			count += (count_hi << 8) + inp(TCNT0); // get counter value
+//			outp(0,TCNT0);					// clear counter		 
+      count += (count_hi << 8) + TCNT0; // get counter value
+  b4:	80 91 76 00 	lds	r24, 0x0076
+  b8:	92 b7       	in	r25, 0x32	; 50
+  ba:	78 2f       	mov	r23, r24
+  bc:	60 e0       	ldi	r22, 0x00	; 0
+  be:	fb 01       	movw	r30, r22
+  c0:	e9 0f       	add	r30, r25
+  c2:	f1 1d       	adc	r31, r1
+  c4:	4e 0f       	add	r20, r30
+  c6:	5f 1f       	adc	r21, r31
+      TCNT0 =0;          // clear counter     
+  c8:	12 be       	out	0x32, r1	; 50
+
+
+			if (count_hi > 80)				// skip if counter has accumulated a
+  ca:	80 91 76 00 	lds	r24, 0x0076
+  ce:	81 35       	cpi	r24, 0x51	; 81
+  d0:	38 f4       	brcc	.+14     	; 0xe0 <__stack+0x41>
+				break;						// too high value
+
+			count_hi = 0;					// clear hi count
+  d2:	10 92 76 00 	sts	0x0076, r1
+		count_hi = 0;						// clear hi count
+
+		
+		// sample loop
+		
+		for (i=0;i<32;i++)
+  d6:	2f 5f       	subi	r18, 0xFF	; 255
+  d8:	3f 4f       	sbci	r19, 0xFF	; 255
+  da:	20 32       	cpi	r18, 0x20	; 32
+  dc:	31 05       	cpc	r19, r1
+  de:	08 f3       	brcs	.-62     	; 0xa2 <__stack+0x3>
+
+
+
+
+		// initially turn off both leds
+		sbi(PORTB,0);
+  e0:	c0 9a       	sbi	0x18, 0	; 24
+		sbi(PORTB,2);
+  e2:	c2 9a       	sbi	0x18, 2	; 24
+    PORTB |= _BV(LED_HI);  
+  e4:	c0 9a       	sbi	0x18, 0	; 24
+    PORTB |= _BV(LED_LO);
+  e6:	c2 9a       	sbi	0x18, 2	; 24
+    //PORTB = (1<LED_HI) + (1<LED_LO); same result as above two line
+    
+		if (count_hi <= 80)					// if count is reasonable
+  e8:	80 91 76 00 	lds	r24, 0x0076
+  ec:	81 35       	cpi	r24, 0x51	; 81
+  ee:	48 f6       	brcc	.-110    	; 0x82 <main+0x18>
+		{
+
+			count = count >> 5;				// average accumulated count by dividing with 32
+  f0:	9a 01       	movw	r18, r20
+  f2:	95 e0       	ldi	r25, 0x05	; 5
+  f4:	36 95       	lsr	r19
+  f6:	27 95       	ror	r18
+  f8:	9a 95       	dec	r25
+  fa:	e1 f7       	brne	.-8      	; 0xf4 <__stack+0x55>
+  fc:	ac e6       	ldi	r26, 0x6C	; 108
+  fe:	b0 e0       	ldi	r27, 0x00	; 0
+ 100:	e0 e0       	ldi	r30, 0x00	; 0
+ 102:	f0 e0       	ldi	r31, 0x00	; 0
+						
+			// go through transition frequencies
+			
+			for (i=0;i<sizeof(Transition_Count)/sizeof(Transition_Count[0]);i++)
+			{
+				if (count < Transition_Count[i])	// stop if lower than this transition count
+ 104:	8d 91       	ld	r24, X+
+ 106:	9c 91       	ld	r25, X
+ 108:	11 97       	sbiw	r26, 0x01	; 1
+ 10a:	28 17       	cp	r18, r24
+ 10c:	39 07       	cpc	r19, r25
+ 10e:	28 f0       	brcs	.+10     	; 0x11a <__stack+0x7b>
+	
+			// now we have to find the correct string
+						
+			// go through transition frequencies
+			
+			for (i=0;i<sizeof(Transition_Count)/sizeof(Transition_Count[0]);i++)
+ 110:	31 96       	adiw	r30, 0x01	; 1
+ 112:	12 96       	adiw	r26, 0x02	; 2
+ 114:	e5 30       	cpi	r30, 0x05	; 5
+ 116:	f1 05       	cpc	r31, r1
+ 118:	a9 f7       	brne	.-22     	; 0x104 <__stack+0x65>
+			
+			// check the count for a match, allowing
+			// 1 extra count "hysteresis" to avoid too 
+			// much LED flickering
+			
+			if (count-1 <= Center_Count[i])			// if count <= this string count
+ 11a:	ee 0f       	add	r30, r30
+ 11c:	ff 1f       	adc	r31, r31
+ 11e:	e0 5a       	subi	r30, 0xA0	; 160
+ 120:	ff 4f       	sbci	r31, 0xFF	; 255
+ 122:	40 81       	ld	r20, Z
+ 124:	51 81       	ldd	r21, Z+1	; 0x01
+ 126:	c9 01       	movw	r24, r18
+ 128:	01 97       	sbiw	r24, 0x01	; 1
+ 12a:	48 17       	cp	r20, r24
+ 12c:	59 07       	cpc	r21, r25
+ 12e:	08 f0       	brcs	.+2      	; 0x132 <__stack+0x93>
+				cbi(PORTB,0);						// light "Too High" LED
+ 130:	c0 98       	cbi	0x18, 0	; 24
+        PORTB &= ~(_BV(LED_HI)); 
+ 132:	c0 98       	cbi	0x18, 0	; 24
+	
+			if (count+1 >= Center_Count[i])			// if count >= this string count
+ 134:	2f 5f       	subi	r18, 0xFF	; 255
+ 136:	3f 4f       	sbci	r19, 0xFF	; 255
+ 138:	24 17       	cp	r18, r20
+ 13a:	35 07       	cpc	r19, r21
+ 13c:	08 f0       	brcs	.+2      	; 0x140 <__stack+0xa1>
+				cbi(PORTB,2);						// light "Too Low" LED
+ 13e:	c2 98       	cbi	0x18, 2	; 24
+        PORTB &= ~(_BV(LED_LO)); 
+ 140:	c2 98       	cbi	0x18, 2	; 24
+ 142:	9f cf       	rjmp	.-194    	; 0x82 <main+0x18>
+
+00000144 <_exit>:
+ 144:	f8 94       	cli
+
+00000146 <__stop_program>:
+ 146:	ff cf       	rjmp	.-2      	; 0x146 <__stop_program>
